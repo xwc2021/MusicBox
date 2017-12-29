@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-
+    LoadJson loadTool;
     Animator animator;
 
     GameObject nowPanel;
@@ -58,6 +58,8 @@ public class PanelManager : MonoBehaviour
     void Awake()
     {
         initAnimator();
+
+        loadTool = GetComponent<LoadJson>();
     }
 
     // Update is called once per frame
@@ -80,6 +82,15 @@ public class PanelManager : MonoBehaviour
         nowPanel.SetActive(false);
         (nowPanel = MyListPanel).SetActive(true);
         animator.SetInteger(str_memoryMyList, 1);
+
+        loadTool.startFetchData(
+            new JQueryList { userid = "Marc" },
+            "http://localhost:3001/lists/get_all_list_of_this_user/",
+            (json)=> {
+                var Obj = JsonUtility.FromJson<JsonM<JList>>(json);
+                print(Obj.data.Count);
+            });
+
     }
 
     //全部樂曲

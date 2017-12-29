@@ -5,13 +5,13 @@ CREATE TABLE lists (
    ispublic boolean NOT NULL
 );
 
+--設成ispublic，就可以被ref(加入)
 CREATE TABLE musics (
    id serial primary key,
    musicname character varying(50) NOT NULL,
    description character varying(100) NOT NULL,
    ispublic boolean NOT NULL,
-   movable boolean NOT NULL,
-   canref boolean NOT NULL
+   movable boolean NOT NULL
 );
 
 CREATE TABLE users (
