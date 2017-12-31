@@ -21,6 +21,7 @@ public class LoadJson : MonoBehaviour
         var headers = new Dictionary<string,string>();
         headers.Add("Content-Type", "application/json");
         string data = JsonUtility.ToJson(query);
+        
         byte[] bs = System.Text.UTF8Encoding.UTF8.GetBytes(data);
 
         using (WWW www = new WWW(url, bs,headers))
@@ -53,7 +54,7 @@ class JQueryList
 
 
 [Serializable]
-public class JList
+public class JMyList
 {
     public int id;
     public string listname;
@@ -62,6 +63,21 @@ public class JList
     public bool isref;
     public int refcount;
     public string authors;
+}
+
+[Serializable]
+public class JRealList
+{
+    public int id;
+    public string listname;
+    public string description;
+    public string createtime;
+    public string userid;
+    public int ownercount;
+    public int refcount;
+    public bool isref;
+    public bool ismylist;
+    public bool ismyref;
 }
 
 [Serializable]

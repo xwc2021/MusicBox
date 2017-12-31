@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] ListBuilder listBuilder;
+    [SerializeField] MyListBuilder listBuilder;
 
     LoadJson loadTool;
     Animator animator;
@@ -89,7 +89,7 @@ public class PanelManager : MonoBehaviour
             new JQueryList { userid = "Marc" },
             "http://localhost:3001/Lists/get_all_list_of_this_user/",
             (json)=> {
-                listBuilder.updateContainer(JsonUtility.FromJson<JsonM<JList>>(json));
+                listBuilder.updateMyList(JsonUtility.FromJson<JsonM<JMyList>>(json));
             });
 
     }
@@ -108,6 +108,13 @@ public class PanelManager : MonoBehaviour
         nowPanel.SetActive(false);
         (nowPanel = AllListPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 3);
+
+        loadTool.startFetchData(
+            new JQueryList { userid = "Marc" },
+            "http://localhost:3001/Lists/get_all_list_not_ref/",
+            (json) => {
+                listBuilder.updateList(JsonUtility.FromJson<JsonM<JRealList>>(json));
+            });
     }
 
     //音樂庫/清單樂曲
