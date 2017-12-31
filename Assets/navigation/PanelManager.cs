@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
+    [SerializeField] ListBuilder listBuilder;
+
     LoadJson loadTool;
     Animator animator;
 
@@ -15,14 +17,14 @@ public class PanelManager : MonoBehaviour
     [SerializeField]
     GameObject MyListPanel;
 
-    //Tab 1會用到
+    //Tab 1子項目
     [SerializeField]
     GameObject AllMusicPanel;
     [SerializeField]
     GameObject AllListPanel;
 
     //Tab 1
-    //Tab 2會用到
+    //Tab 2子項目
     [SerializeField]
     GameObject ListMusicPanel;
 
@@ -85,10 +87,9 @@ public class PanelManager : MonoBehaviour
 
         loadTool.startFetchData(
             new JQueryList { userid = "Marc" },
-            "http://localhost:3001/lists/get_all_list_of_this_user/",
+            "http://localhost:3001/Lists/get_all_list_of_this_user/",
             (json)=> {
-                var Obj = JsonUtility.FromJson<JsonM<JList>>(json);
-                print(Obj.data.Count);
+                listBuilder.updateContainer(JsonUtility.FromJson<JsonM<JList>>(json));
             });
 
     }

@@ -34,12 +34,12 @@ public class LoadJson : MonoBehaviour
 }
 
 [Serializable]
-class JsonM<Type>
+public class JsonM<Type>
 {
     public List<Type> data;
 }
 
-class JsonS<Type>
+public class JsonS<Type>
 {
     public Type data;
 }
@@ -53,13 +53,15 @@ class JQueryList
 
 
 [Serializable]
-class JList
+public class JList
 {
     public int id;
     public string listname;
     public string description;
     public string createtime;
     public bool isref;
+    public int refcount;
+    public string authors;
 }
 
 [Serializable]
@@ -69,7 +71,7 @@ class JQueryMusic
 }
 
 [Serializable]
-class JMusic
+public class JMusic
 {
     public int listid;
     public int musicid;
