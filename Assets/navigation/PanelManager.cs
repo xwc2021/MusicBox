@@ -26,7 +26,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField]
     GameObject AllListPanel;
     [SerializeField]
-    GameObject RefListMusicPanel;
+    GameObject ListMusicPanel;
 
     //Tab 2子項目
     [SerializeField]
@@ -151,14 +151,14 @@ public class PanelManager : MonoBehaviour
     public void setActiveMusicRepoListMusicPanel()
     {
         nowPanel.SetActive(false);
-        (nowPanel = RefListMusicPanel).SetActive(true);
+        (nowPanel = ListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 4);
 
         loadTool.startFetchData(
-            new JQueryRefListMusic { userid = userid, listid = listid },
+            new JQueryListMusic { userid = userid, listid = listid },
             "http://localhost:3001/Musics/get_list_music_by_viewer/",
             (json) => {
-                musicBuilder.updateRefListMusic(JsonUtility.FromJson<JsonM<JRefListMusic>>(json));
+                musicBuilder.updateRefListMusic(JsonUtility.FromJson<JsonM<JListMusic>>(json));
             });
     }
 
@@ -192,8 +192,9 @@ public class PanelManager : MonoBehaviour
         animator.SetTrigger(str_gotoAllList);
     }
 
-    public void gotoListMusic()
+    public void gotoListMusic(int listid)
     {
+        this.listid = listid;
         animator.SetTrigger(str_gotoListMusic);
     }
 

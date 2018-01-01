@@ -97,18 +97,20 @@ public class JMyListMusic
     public int ownercount;
     public int refcount;
     public string createtime;
+
     public bool isref;
+    public string authors;
 }
 
 [Serializable]
-class JQueryRefListMusic
+class JQueryListMusic
 {
     public string userid;
     public int listid;
 }
 
 [Serializable]
-public class JRefListMusic
+public class JListMusic
 {
     public int id;
     public string musicname;
@@ -118,6 +120,10 @@ public class JRefListMusic
     public string createtime;
     public int ownercount;
     public int refcount;
+
+    public bool ismymusic;
+    public bool ismyref;
+    public string authors;
 
     //需要多1個欄位:記錄user是否已經ref過
 }
