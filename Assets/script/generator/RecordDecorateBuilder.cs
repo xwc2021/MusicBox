@@ -5,7 +5,7 @@ using UnityEngine;
 public class RecordDecorateBuilder : MonoBehaviour
 {
     //這裡有優化的空間
-    protected void batchAdd<JsonType, UIType>(List<JsonType> records, UIType template, RectTransform container) where UIType : MonoBehaviour
+    protected void batchAdd<JsonType, UIType>(List<JsonType> records, UIType template, RectTransform container) where UIType : MonoBehaviour,RecordDecorate<JsonType>
     {
         UIType[] old =container.GetComponentsInChildren<UIType>();
         for (int i = 0; i < old.Length; i++)
@@ -17,7 +17,7 @@ public class RecordDecorateBuilder : MonoBehaviour
         });
     }
 
-    protected void add<JsonType, UIType>(JsonType record, UIType template, RectTransform container) where UIType : MonoBehaviour
+    protected void add<JsonType, UIType>(JsonType record, UIType template, RectTransform container) where UIType : MonoBehaviour, RecordDecorate<JsonType>
     {
         UIType oneMusic = Instantiate<UIType>(template, container);
         RecordDecorate<JsonType> decorate = oneMusic.GetComponent<RecordDecorate<JsonType>>();

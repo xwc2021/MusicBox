@@ -9,7 +9,6 @@ public class ListBuilder : RecordDecorateBuilder
     [SerializeField] RectTransform listContainer;
     [SerializeField] RectTransform list5Container;
 
-    //這裡有優化的空間
     public void updateMyList(JsonM<JMyList> Obj)
     {
         batchAdd<JMyList, OneList>(Obj.data, listTemplate, myListContainer);
