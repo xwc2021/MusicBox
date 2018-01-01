@@ -143,6 +143,7 @@ public class JMusic
     public int voterscount;
 
     public bool ismysong;
+    public string authors;
 
     //需要多1個欄位:記錄user是否已經ref過
 }
