@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MusicBuilder : RecordDecorateBuilder
 {
-    [SerializeField] int recordCount;
     [SerializeField] OneMusic musicTemplate;
     [SerializeField] RectTransform musicContainer;
     [SerializeField] RectTransform music5Container;

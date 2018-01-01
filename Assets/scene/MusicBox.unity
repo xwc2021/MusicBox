@@ -7993,8 +7993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d52bdd4faa146b8835c07eafa378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listBuilder: {fileID: 1732036652}
-  musicBuilder: {fileID: 1661066139}
+  listBuilder: {fileID: 2126665712}
+  musicBuilder: {fileID: 2126665710}
   MusicRepoPanel: {fileID: 942410891}
   MyListPanel: {fileID: 288614597}
   AllMusicPanel: {fileID: 1735926069}
@@ -11882,7 +11882,6 @@ GameObject:
   - component: {fileID: 1661066138}
   - component: {fileID: 1661066137}
   - component: {fileID: 1661066140}
-  - component: {fileID: 1661066139}
   - component: {fileID: 1661066141}
   m_Layer: 5
   m_Name: MusicTemplate
@@ -11946,23 +11945,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1661066135}
---- !u!114 &1661066139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1661066135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5eeb27ff3a7db43a04472cdd4e3bc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recordCount: 0
-  musicTemplate: {fileID: 1661066140}
-  musicContainer: {fileID: 96521040}
-  music5Container: {fileID: 797885638}
-  myListMusicContainer: {fileID: 1405855542}
-  refListMusicContainer: {fileID: 1970140270}
 --- !u!114 &1661066140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12230,7 +12212,6 @@ GameObject:
   - component: {fileID: 1732036650}
   - component: {fileID: 1732036649}
   - component: {fileID: 1732036651}
-  - component: {fileID: 1732036652}
   m_Layer: 5
   m_Name: ListTemplate
   m_TagString: Untagged
@@ -12310,21 +12291,6 @@ MonoBehaviour:
   Author: {fileID: 701514771}
   TotalPeople: {fileID: 791692032}
   image: {fileID: 1732036649}
---- !u!114 &1732036652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1732036647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2036a97306fd74d923f5bd4f9d1914, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listTemplate: {fileID: 1732036651}
-  myListContainer: {fileID: 663520480}
-  listContainer: {fileID: 1055062860}
-  list5Container: {fileID: 587282699}
 --- !u!1 &1735926069
 GameObject:
   m_ObjectHideFlags: 0
@@ -12817,6 +12783,7 @@ RectTransform:
   m_Children:
   - {fileID: 1732036648}
   - {fileID: 1661066136}
+  - {fileID: 2126665711}
   m_Father: {fileID: 1018608320}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14761,6 +14728,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &2126665709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2126665711}
+  - component: {fileID: 2126665712}
+  - component: {fileID: 2126665710}
+  m_Layer: 5
+  m_Name: Builder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2126665710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2126665709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5eeb27ff3a7db43a04472cdd4e3bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTemplate: {fileID: 1661066140}
+  musicContainer: {fileID: 96521040}
+  music5Container: {fileID: 797885638}
+  myListMusicContainer: {fileID: 1405855542}
+  refListMusicContainer: {fileID: 1970140270}
+--- !u!224 &2126665711
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2126665709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1792959311}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -200.95619, y: -350}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2126665712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2126665709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2036a97306fd74d923f5bd4f9d1914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listTemplate: {fileID: 1732036651}
+  myListContainer: {fileID: 663520480}
+  listContainer: {fileID: 1055062860}
+  list5Container: {fileID: 587282699}
 --- !u!1 &2136710129
 GameObject:
   m_ObjectHideFlags: 0
