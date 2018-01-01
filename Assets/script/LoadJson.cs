@@ -50,6 +50,7 @@ public class JsonS<Type>
 class JQueryList
 {
     public string userid;
+    public bool islimit;
 }
 
 
@@ -75,21 +76,19 @@ public class JRealList
     public string userid;
     public int ownercount;
     public int refcount;
-    public bool isref;
     public bool ismylist;
     public bool ismyref;
 }
 
 [Serializable]
-class JQueryMusic
+class JQueryMyListMusic
 {
     public int listid;
 }
 
 [Serializable]
-public class JMusic
+public class JMyListMusic
 {
-    public int listid;
     public int musicid;
     public string musicname;
     public string description;
@@ -101,4 +100,50 @@ public class JMusic
     public bool isref;
 }
 
+[Serializable]
+class JQueryRefListMusic
+{
+    public string userid;
+    public int listid;
+}
+
+[Serializable]
+public class JRefListMusic
+{
+    public int id;
+    public string musicname;
+    public string description;
+    public int voterscount;
+    public int averagestart;
+    public string createtime;
+    public int ownercount;
+    public int refcount;
+
+    //需要多1個欄位:記錄user是否已經ref過
+}
+
+[Serializable]
+class JQueryMusic
+{
+    public string userid;
+    public bool islimit;
+}
+
+[Serializable]
+public class JMusic
+{
+    public int id;
+    public string musicname;
+    public string description;
+    public string createtime;
+    public int ownercount;
+    public int refcount;
+
+    public int averagestart;
+    public int voterscount;
+
+    public bool ismysong;
+
+    //需要多1個欄位:記錄user是否已經ref過
+}
 

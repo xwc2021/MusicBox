@@ -20,6 +20,11 @@ public class OneList : MonoBehaviour
         AuthorText.text = record.authors;
         TotalPeopleText.text = $"{record.refcount}人已加入";
         image.color = myListColor;
+
+        if (record.isref)
+            image.color = myRefListColor;
+        else
+            image.color = myListColor;
     }
 
     public void refreshList(JRealList record)

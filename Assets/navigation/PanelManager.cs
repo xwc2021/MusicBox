@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] MyListBuilder listBuilder;
+    string userid = "Marc";
+    int listid=0;
+    [SerializeField] ListBuilder listBuilder;
+    [SerializeField] MusicBuilder musicBuilder;
 
     LoadJson loadTool;
     Animator animator;
@@ -22,11 +25,14 @@ public class PanelManager : MonoBehaviour
     GameObject AllMusicPanel;
     [SerializeField]
     GameObject AllListPanel;
+    [SerializeField]
+    GameObject RefListMusicPanel;
 
-    //Tab 1
     //Tab 2子項目
     [SerializeField]
-    GameObject ListMusicPanel;
+    GameObject MyListMusicPanel;
+
+    
 
     [SerializeField]
     GameObject PlayMusicPanel;
@@ -76,6 +82,22 @@ public class PanelManager : MonoBehaviour
         nowPanel.SetActive(false);
         (nowPanel = MusicRepoPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 1);
+
+        //熱門音樂
+        loadTool.startFetchData(
+            new JQueryMusic { userid = userid, islimit = true },
+            "http://localhost:3001/Musics/get_all_public_musics/",
+            (json) => {
+                musicBuilder.updateMusic5(JsonUtility.FromJson<JsonM<JMusic>>(json));
+            });
+
+        //熱門清單
+        loadTool.startFetchData(
+            new JQueryList { userid = userid, islimit = true },
+            "http://localhost:3001/Lists/get_all_list_not_ref/",
+            (json) => {
+                listBuilder.updateList5(JsonUtility.FromJson<JsonM<JRealList>>(json));
+            });
     }
 
     //我的清單
@@ -86,7 +108,7 @@ public class PanelManager : MonoBehaviour
         animator.SetInteger(str_memoryMyList, 1);
 
         loadTool.startFetchData(
-            new JQueryList { userid = "Marc" },
+            new JQueryList { userid = userid },
             "http://localhost:3001/Lists/get_all_list_of_this_user/",
             (json)=> {
                 listBuilder.updateMyList(JsonUtility.FromJson<JsonM<JMyList>>(json));
@@ -100,6 +122,14 @@ public class PanelManager : MonoBehaviour
         nowPanel.SetActive(false);
         (nowPanel = AllMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 2);
+
+        //熱門音樂
+        loadTool.startFetchData(
+            new JQueryMusic { userid = userid, islimit = false },
+            "http://localhost:3001/Musics/get_all_public_musics/",
+            (json) => {
+                musicBuilder.updateMusic(JsonUtility.FromJson<JsonM<JMusic>>(json));
+            });
     }
 
     //全部清單
@@ -110,7 +140,7 @@ public class PanelManager : MonoBehaviour
         animator.SetInteger(str_memoryMusicRepo, 3);
 
         loadTool.startFetchData(
-            new JQueryList { userid = "Marc" },
+            new JQueryList { userid = userid, islimit = false },
             "http://localhost:3001/Lists/get_all_list_not_ref/",
             (json) => {
                 listBuilder.updateList(JsonUtility.FromJson<JsonM<JRealList>>(json));
@@ -121,16 +151,30 @@ public class PanelManager : MonoBehaviour
     public void setActiveMusicRepoListMusicPanel()
     {
         nowPanel.SetActive(false);
-        (nowPanel = ListMusicPanel).SetActive(true);
+        (nowPanel = RefListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 4);
+
+        loadTool.startFetchData(
+            new JQueryRefListMusic { userid = userid, listid = listid },
+            "http://localhost:3001/Musics/get_list_music_by_viewer/",
+            (json) => {
+                musicBuilder.updateRefListMusic(JsonUtility.FromJson<JsonM<JRefListMusic>>(json));
+            });
     }
 
     //我的清單/清單樂曲
     public void setActiveMyListListMusicPanel()
     {
         nowPanel.SetActive(false);
-        (nowPanel = ListMusicPanel).SetActive(true);
+        (nowPanel = MyListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMyList, 2);
+
+        loadTool.startFetchData(
+            new JQueryMyListMusic { listid = listid },
+            "http://localhost:3001/Musics/get_list_music_by_owner/",
+            (json) => {
+                musicBuilder.updateMyListMusic(JsonUtility.FromJson<JsonM<JMyListMusic>>(json));
+            });
     }
 
     public void goBack()
