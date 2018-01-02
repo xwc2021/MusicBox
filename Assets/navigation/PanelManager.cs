@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
-    string userid = "Marc";
+    public string userid = "Marc";
     int listid = 0;
     bool ismyList;
     [SerializeField] ListBuilder listBuilder;
