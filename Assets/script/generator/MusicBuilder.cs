@@ -8,7 +8,7 @@ public class MusicBuilder : RecordDecorateBuilder
     [SerializeField] RectTransform musicContainer;
     [SerializeField] RectTransform music5Container;
     [SerializeField] RectTransform myListMusicContainer;
-    [SerializeField] RectTransform listMusicContainer;
+    [SerializeField] RectTransform MusicRepolistMusicContainer;
 
     public void updateMusic(JsonM<JMusic> Obj)
     {
@@ -20,14 +20,16 @@ public class MusicBuilder : RecordDecorateBuilder
         batchAdd<JMusic, OneMusic>(Obj.data, musicTemplate, music5Container);
     }
 
-    public void updateMyListMusic(JsonM<JMyListMusic> Obj)
+    public void updateMyListMusic(JsonM<JMyListMusic> Obj,bool tabMusicRepo)
     {
-        batchAdd<JMyListMusic, OneMusic>(Obj.data, musicTemplate, myListMusicContainer);
+        RectTransform target = tabMusicRepo ? MusicRepolistMusicContainer : myListMusicContainer;
+        batchAdd<JMyListMusic, OneMusic>(Obj.data, musicTemplate, target);
     }
 
-    public void updateRefListMusic(JsonM<JListMusic> Obj)
+    public void updateListMusic(JsonM<JListMusic> Obj, bool tabMusicRepo)
     {
-        batchAdd<JListMusic, OneMusic>(Obj.data, musicTemplate, listMusicContainer);
+        RectTransform target = tabMusicRepo ? MusicRepolistMusicContainer : myListMusicContainer;
+        batchAdd<JListMusic, OneMusic>(Obj.data, musicTemplate, target);
     }
 
     

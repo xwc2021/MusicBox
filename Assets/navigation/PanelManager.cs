@@ -5,7 +5,8 @@ using UnityEngine;
 public class PanelManager : MonoBehaviour
 {
     string userid = "Marc";
-    int listid=0;
+    int listid = 0;
+    bool ismyList;
     [SerializeField] ListBuilder listBuilder;
     [SerializeField] MusicBuilder musicBuilder;
 
@@ -26,13 +27,13 @@ public class PanelManager : MonoBehaviour
     [SerializeField]
     GameObject AllListPanel;
     [SerializeField]
-    GameObject ListMusicPanel;
+    GameObject MusicRepoListMusicPanel;
 
     //Tab 2子項目
     [SerializeField]
-    GameObject MyListMusicPanel;
+    GameObject ListMusicPanel;
 
-    
+
 
     [SerializeField]
     GameObject PlayMusicPanel;
@@ -110,7 +111,7 @@ public class PanelManager : MonoBehaviour
         loadTool.startFetchData(
             new JQueryList { userid = userid },
             "http://localhost:3001/Lists/get_all_list_of_this_user/",
-            (json)=> {
+            (json) => {
                 listBuilder.updateMyList(JsonUtility.FromJson<JsonM<JMyList>>(json));
             });
 
@@ -151,29 +152,45 @@ public class PanelManager : MonoBehaviour
     public void setActiveMusicRepoListMusicPanel()
     {
         nowPanel.SetActive(false);
-        (nowPanel = ListMusicPanel).SetActive(true);
+        (nowPanel = MusicRepoListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 4);
 
-        loadTool.startFetchData(
-            new JQueryListMusic { userid = userid, listid = listid },
-            "http://localhost:3001/Musics/get_list_music_by_viewer/",
-            (json) => {
-                musicBuilder.updateRefListMusic(JsonUtility.FromJson<JsonM<JListMusic>>(json));
-            });
+        select(true);
     }
 
     //我的清單/清單樂曲
     public void setActiveMyListListMusicPanel()
     {
         nowPanel.SetActive(false);
-        (nowPanel = MyListMusicPanel).SetActive(true);
+        (nowPanel = ListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMyList, 2);
 
+        select(false);
+    }
+
+    void select(bool isMusicRepo)
+    {
+        if (ismyList) showMyListMusic(isMusicRepo);
+        else showListMusic(isMusicRepo);
+    }
+
+    void showListMusic(bool isMusicRepo)
+    {
+        loadTool.startFetchData(
+            new JQueryListMusic { userid = userid, listid = listid },
+            "http://localhost:3001/Musics/get_list_music_by_viewer/",
+            (json) => {
+                musicBuilder.updateListMusic(JsonUtility.FromJson<JsonM<JListMusic>>(json), isMusicRepo);
+            });
+    }
+
+    void showMyListMusic(bool isMusicRepo)
+    {
         loadTool.startFetchData(
             new JQueryMyListMusic { listid = listid },
             "http://localhost:3001/Musics/get_list_music_by_owner/",
             (json) => {
-                musicBuilder.updateMyListMusic(JsonUtility.FromJson<JsonM<JMyListMusic>>(json));
+                musicBuilder.updateMyListMusic(JsonUtility.FromJson<JsonM<JMyListMusic>>(json), isMusicRepo);
             });
     }
 
@@ -192,9 +209,10 @@ public class PanelManager : MonoBehaviour
         animator.SetTrigger(str_gotoAllList);
     }
 
-    public void gotoListMusic(int listid)
+    public void gotoListMusic(int listid, bool ismyList = false)
     {
         this.listid = listid;
+        this.ismyList = ismyList;
         animator.SetTrigger(str_gotoListMusic);
     }
 

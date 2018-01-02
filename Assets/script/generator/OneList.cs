@@ -13,7 +13,7 @@ public class OneList : MonoBehaviour,RecordDecorate<JMyList>,RecordDecorate<JRea
     [SerializeField] Text TotalPeople;
     [SerializeField] Image image;
     int listid;
-
+    bool isMyList;
     
 
     void RecordDecorate<JMyList>.refreshUI(JMyList record)
@@ -24,6 +24,7 @@ public class OneList : MonoBehaviour,RecordDecorate<JMyList>,RecordDecorate<JRea
         TotalPeople.text = $"{record.refcount}人已加入";
 
         image.color = record.isref ? Style.myRefColor : Style.myColor;
+        isMyList = !record.isref;
     }
 
     void RecordDecorate<JRealList>.refreshUI(JRealList record)
@@ -39,10 +40,13 @@ public class OneList : MonoBehaviour,RecordDecorate<JMyList>,RecordDecorate<JRea
             image.color = Style.myColor;
         else
             image.color = Style.otherColor;
+
+        isMyList = record.ismylist;
     }
 
     public void gotoListMusic()
     {
-        panelManager.gotoListMusic(listid);
+        print(isMyList);
+        panelManager.gotoListMusic(listid, isMyList);
     }
 }
