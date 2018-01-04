@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
+    public string localhost = "http://111.243.56.3:3001";
     public string userid = "Marc";
     int listid = 0;
     bool ismyList;
@@ -87,7 +88,7 @@ public class PanelManager : MonoBehaviour
         //熱門音樂
         loadTool.startFetchData(
             new JQueryMusic { userid = userid, islimit = true },
-            "http://localhost:3001/Musics/get_all_public_musics/",
+             $"{localhost}/Musics/get_all_public_musics/",
             (json) => {
                 musicBuilder.updateMusic5(JsonUtility.FromJson<JsonM<JMusic>>(json));
             });
@@ -95,7 +96,7 @@ public class PanelManager : MonoBehaviour
         //熱門清單
         loadTool.startFetchData(
             new JQueryList { userid = userid, islimit = true },
-            "http://localhost:3001/Lists/get_all_list_not_ref/",
+            $"{localhost}/Lists/get_all_list_not_ref/",
             (json) => {
                 listBuilder.updateList5(JsonUtility.FromJson<JsonM<JRealList>>(json));
             });
@@ -110,7 +111,7 @@ public class PanelManager : MonoBehaviour
 
         loadTool.startFetchData(
             new JQueryList { userid = userid },
-            "http://localhost:3001/Lists/get_all_list_of_this_user/",
+            $"{localhost}/Lists/get_all_list_of_this_user/",
             (json) => {
                 listBuilder.updateMyList(JsonUtility.FromJson<JsonM<JMyList>>(json));
             });
@@ -127,7 +128,7 @@ public class PanelManager : MonoBehaviour
         //熱門音樂
         loadTool.startFetchData(
             new JQueryMusic { userid = userid, islimit = false },
-            "http://localhost:3001/Musics/get_all_public_musics/",
+            $"{localhost}/Musics/get_all_public_musics/",
             (json) => {
                 musicBuilder.updateMusic(JsonUtility.FromJson<JsonM<JMusic>>(json));
             });
@@ -142,7 +143,7 @@ public class PanelManager : MonoBehaviour
 
         loadTool.startFetchData(
             new JQueryList { userid = userid, islimit = false },
-            "http://localhost:3001/Lists/get_all_list_not_ref/",
+            $"{localhost}/Lists/get_all_list_not_ref/",
             (json) => {
                 listBuilder.updateList(JsonUtility.FromJson<JsonM<JRealList>>(json));
             });
@@ -178,7 +179,7 @@ public class PanelManager : MonoBehaviour
     {
         loadTool.startFetchData(
             new JQueryListMusic { userid = userid, listid = listid },
-            "http://localhost:3001/Musics/get_list_music_by_viewer/",
+            $"{localhost}/Musics/get_list_music_by_viewer/",
             (json) => {
                 musicBuilder.updateListMusic(JsonUtility.FromJson<JsonM<JListMusic>>(json), isMusicRepo);
             });
@@ -188,7 +189,7 @@ public class PanelManager : MonoBehaviour
     {
         loadTool.startFetchData(
             new JQueryMyListMusic { listid = listid },
-            "http://localhost:3001/Musics/get_list_music_by_owner/",
+            $"{localhost}/Musics/get_list_music_by_owner/",
             (json) => {
                 musicBuilder.updateMyListMusic(JsonUtility.FromJson<JsonM<JMyListMusic>>(json), isMusicRepo);
             });
