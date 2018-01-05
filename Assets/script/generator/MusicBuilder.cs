@@ -20,12 +20,6 @@ public class MusicBuilder : RecordDecorateBuilder
         batchAdd<JMusic, OneMusic>(Obj.data, musicTemplate, music5Container);
     }
 
-    public void updateMyListMusic(JsonM<JMyListMusic> Obj,bool tabMusicRepo)
-    {
-        RectTransform target = tabMusicRepo ? MusicRepolistMusicContainer : myListMusicContainer;
-        batchAdd<JMyListMusic, OneMusic>(Obj.data, musicTemplate, target);
-    }
-
     public void updateListMusic(JsonM<JListMusic> Obj, bool tabMusicRepo)
     {
         RectTransform target = tabMusicRepo ? MusicRepolistMusicContainer : myListMusicContainer;

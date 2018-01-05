@@ -156,7 +156,7 @@ public class PanelManager : MonoBehaviour
         (nowPanel = MusicRepoListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMusicRepo, 4);
 
-        select(true);
+        showListMusic(true);
     }
 
     //我的清單/清單樂曲
@@ -166,14 +166,9 @@ public class PanelManager : MonoBehaviour
         (nowPanel = ListMusicPanel).SetActive(true);
         animator.SetInteger(str_memoryMyList, 2);
 
-        select(false);
+        showListMusic(false);
     }
 
-    void select(bool isMusicRepo)
-    {
-        if (ismyList) showMyListMusic(isMusicRepo);
-        else showListMusic(isMusicRepo);
-    }
 
     void showListMusic(bool isMusicRepo)
     {
@@ -182,16 +177,6 @@ public class PanelManager : MonoBehaviour
             $"{localhost}/Musics/get_list_music_by_viewer/",
             (json) => {
                 musicBuilder.updateListMusic(JsonUtility.FromJson<JsonM<JListMusic>>(json), isMusicRepo);
-            });
-    }
-
-    void showMyListMusic(bool isMusicRepo)
-    {
-        loadTool.startFetchData(
-            new JQueryMyListMusic { listid = listid },
-            $"{localhost}/Musics/get_list_music_by_owner/",
-            (json) => {
-                musicBuilder.updateMyListMusic(JsonUtility.FromJson<JsonM<JMyListMusic>>(json), isMusicRepo);
             });
     }
 

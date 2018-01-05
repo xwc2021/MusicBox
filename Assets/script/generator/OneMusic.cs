@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OneMusic : MonoBehaviour, RecordDecorate<JMusic>, RecordDecorate<JMyListMusic>,RecordDecorate<JListMusic>
+public class OneMusic : MonoBehaviour, RecordDecorate<JMusic>,RecordDecorate<JListMusic>
 {
     [SerializeField] Text musicName;
     [SerializeField] Text author;
@@ -14,15 +14,6 @@ public class OneMusic : MonoBehaviour, RecordDecorate<JMusic>, RecordDecorate<JM
         author.text = record.authors;
 
         image.color =record.ismysong?Style.myColor:Style.otherColor;
-    }
-
-    void RecordDecorate<JMyListMusic>.refreshUI(JMyListMusic record)
-    {
-        musicName.text = record.musicname;
-        author.text = record.authors;
-
-        image.color = record.isref ? Style.myRefColor : Style.myColor;
-        
     }
 
     void RecordDecorate<JListMusic>.refreshUI(JListMusic record)

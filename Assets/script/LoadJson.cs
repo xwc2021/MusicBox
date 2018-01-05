@@ -81,28 +81,6 @@ public class JRealList
 }
 
 [Serializable]
-class JQueryMyListMusic
-{
-    public int listid;
-}
-
-[Serializable]
-public class JMyListMusic
-{
-    public int musicid;
-    public string musicname;
-    public string description;
-    public int voterscount;
-    public int averagestart;
-    public int ownercount;
-    public int refcount;
-    public string createtime;
-
-    public bool isref;
-    public string authors;
-}
-
-[Serializable]
 class JQueryListMusic
 {
     public string userid;
